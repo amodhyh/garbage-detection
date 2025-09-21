@@ -1,0 +1,30 @@
+EC9570_Project.pdf
+data/
+
+# --- Frontend (React/Vite) ---
+# Dependencies
+frontend/node_modules/
+
+# Build outputs (Vite/CRA)
+frontend/dist/
+frontend/build/
+
+# Environment files (keep secrets out of git)
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Caches and coverage
+frontend/.vite/
+frontend/.cache/
+frontend/coverage/
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# OS junk
+frontend/.DS_Store
+frontend/Thumbs.db
