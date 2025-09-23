@@ -56,6 +56,14 @@ The following digital image processing techniques are used in this project:
 
 -   **Image Resizing**: A technique that is used to change the size of an image.
 -   **Image Normalization**: A technique that is used to change the range of pixel intensity values.
+-   **Histogram Equalization**: a technique used in image processing to adjust the contrast of an image by redistributing the intensity levels of its pixels.
+
+** features
+Interactive Frontend: A clean and responsive user interface built with React to easily interact with the AI model.
+
+Efficient Backend: A high-performance API using FastAPI to serve the AI model's predictions.
+
+Model Integration: Seamless integration of a Keras deep learning model for  
 
 ## Getting Started
 
