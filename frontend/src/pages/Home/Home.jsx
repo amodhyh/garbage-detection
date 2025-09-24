@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-
+import '../../styles/home.css'
 const Home = () => {
   const [image, setImage] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
@@ -45,7 +45,12 @@ const Home = () => {
 
       <div className="drag-drop-area" onDragOver={handleDragOver} onDrop={handleDrop}>
         <p>Drag & Drop your images here</p>
-        <p>or</p>
+            {previewImage && (
+              <div className="preview">
+                <img src={previewImage} alt="Selected" />
+              </div>
+            )}
+
         <input
           ref={fileInputRef}
           type="file"
@@ -54,25 +59,15 @@ const Home = () => {
           className="upload-input"
           onChange={handleInputChange}
         />
+       
       </div>
-
-      <button
+       
+        <button
         type="button"
         className="upload-button"
         onClick={() => fileInputRef.current?.click()}
-      >
-        Browse Files
-      </button>
-
-      {previewImage && (
-        <div className="preview">
-          <img src={previewImage} alt="Selected" />
-        </div>
-      )}
-
-      <p className="description">
-        Sortify is an advanced image sorting application that leverages cutting-edge AI technology to categorize and organize your images with unparalleled accuracy and efficiency. Whether you're a professional photographer, a social media enthusiast, or simply someone who loves capturing moments, Sortify is designed to make managing your photo collection effortless and enjoyable.
-      </p>
+      >Upload Files</button>
+      
     </div>
   )
 }

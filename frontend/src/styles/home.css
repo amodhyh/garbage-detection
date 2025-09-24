@@ -1,0 +1,61 @@
+/* Global reset and defaults */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #2e2e2e;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, Helvetica, sans-serif;
+}
+
+/* Page-specific */
+.home-page {
+  min-height: 100vh;
+  color: #e8e8e8;
+  background-image: url('../assets/homeBackground.svg');
+  /* your page styles here */
+}
+.drag-drop-area {
+  position: relative; /* To position the input absolutely within this div */
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  background-color: #5e17eb;
+  border-radius: 40px;
+
+}
+.drag-drop-area .upload-input {
+  position: absolute;
+  inset: 0;           /* top: 0; right: 0; bottom: 0; left: 0 */
+  width: 30%;
+  height: 30%;
+  opacity: 0;         /* Fully transparent */
+  cursor: pointer;    /* Shows pointer cursor */
+  z-index: 2;         /* Make sure it's above the drop zone content */
+  border: none;       /* Remove any border */
+}
+.drag-drop-area:hover {
+  background-color: #ffffff;
+  border-color: #7b5fff;
+  color:#5e17eb;
+}
+.drag-drop-area .preview {
+  margin-top: 20px;
+  width: 20%;
+  height: 20%px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.drag-drop-area .preview img {
+  max-width: 50%;
+  max-height: 50%;
+  object-fit: contain;
+  border-radius: 10px;
+  display: block;
+}
