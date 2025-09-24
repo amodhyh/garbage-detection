@@ -41,33 +41,47 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <h1>Welcome to Sortify.</h1>
-
-      <div className="drag-drop-area" onDragOver={handleDragOver} onDrop={handleDrop}>
-        <p>Drag & Drop your images here</p>
+      <div className='main-text'>
+        
+        <h1>Welcome to <span className="sortify-brand">Sortify</span>.</h1></div>
+      
+      <div className='main-area'>
+        <div className="home-content-row">
+          <div className="drag-drop-area" onDragOver={handleDragOver} onDrop={handleDrop}>
+            {!previewImage && <p>Drag & Drop your images here</p>}
             {previewImage && (
               <div className="preview">
                 <img src={previewImage} alt="Selected" />
               </div>
             )}
-
-        <input
-          ref={fileInputRef}
-          type="file"
-          name="image"
-          accept="image/*"
-          className="upload-input"
-          onChange={handleInputChange}
-        />
-       
+            <input
+              ref={fileInputRef}
+              type="file"
+              name="image"
+              accept="image/*"
+              className="upload-input"
+              onChange={handleInputChange}
+            />
+            <button
+              type="button"
+              className="attach-button"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <img src="/src/assets/attach.svg" alt="Attach" style={{ width: '48px', height: '48px' }} />
+            </button>
+          </div>
+          <button
+            type="button"
+            className="classify-button"
+            onClick={()=>setImage(previewImage)}
+            
+          ><img src='./src/assets/classifyButton.svg'style={{ paddingRight:'5px',width: '240px' , height: '240px' }}></img> </button> 
+          
+        </div>
       </div>
-       
-        <button
-        type="button"
-        className="upload-button"
-        onClick={() => fileInputRef.current?.click()}
-      >Upload Files</button>
       
+       
+        <div className='authors'>Made By - 2021/E/045    ,   2021/E/179</div>
     </div>
   )
 }
