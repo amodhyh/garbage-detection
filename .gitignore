@@ -28,3 +28,5 @@ frontend/pnpm-debug.log*
 # OS junk
 frontend/.DS_Store
 frontend/Thumbs.db
+
+.gitignore
