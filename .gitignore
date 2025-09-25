@@ -35,3 +35,4 @@ frontend/Thumbs.db
 backend/__pycache__
 backend/models
 backend/util/__pycache__
+backend
