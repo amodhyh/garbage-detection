@@ -9,4 +9,4 @@ frontend/node_modules
 backend/util/__pycache__/
 .venv311
 .dipproject_venv
-frontend
+get-pip.py
