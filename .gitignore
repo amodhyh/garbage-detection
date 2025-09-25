@@ -1,0 +1,10 @@
+backend/models
+backend/_pycache__
+backend/__pycache__
+frontend/node_modules
+.venv311
+.vscode
+.vite
+.idea
+
+backend/util/__pycache__/
