@@ -1,0 +1,4 @@
+frontend/.vite
+frontend/node_modules
+
+backend/models/CNNModel.keras
