@@ -1,6 +1,9 @@
 EC9570_Project.pdf
 data/
-
+.venv311
+.vscode
+backend/util/__pycache__/
+backend/__pycache__/
 # --- Frontend (React/Vite) ---
 # Dependencies
 frontend/node_modules/
