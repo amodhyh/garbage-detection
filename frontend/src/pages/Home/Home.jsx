@@ -3,7 +3,7 @@ import {useNavigate,useLocation} from 'react-router-dom'
 import { postData } from '../../services/api'
 import '../../styles/home.css'
 import Lottie from 'lottie-react';
-import loadingAnimationFile from '../../assets/loading.lottie';
+import loadingAnimationFile from '../../assets/loading.json';
 
 const Home = () => {
 
@@ -61,14 +61,21 @@ const Home = () => {
       //postData returns a promise
       //when the promise is resolved(HTTP req finished), we get the data and then is exec
       //
-    setLoadingAnime(true)
-    postData(image).then((data)=>{
-      
-      setLoadingAnime(false)
-      navigate('/result',{state:{data:image}})
+      setLoadingAnime(true);
+      postData(image)
+        .then((data) => {
+          setLoadingAnime(false);
+          console.log('API response:', data);
+          navigate('/result', { state: { data } });
+        })
+        .catch((error) => {
+          setLoadingAnime(false);
+          console.error('Error:', error);
+          alert('Classification failed. Please try again.');
+        });
 
-    })
-  }
+    }
+  
 
   return (
     <div className="home-page">

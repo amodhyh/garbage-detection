@@ -1,7 +1,11 @@
 
-const postData = async (formData) => {
+const postData = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
     try {
-      const response = await fetch('http://localhost:8000/predict', {
+      
+      const response = await fetch('http://localhost:8089/classify', {
         method: 'POST',
         body: formData,
       });

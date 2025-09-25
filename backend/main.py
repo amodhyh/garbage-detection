@@ -14,7 +14,7 @@ import tensorflow as tf
 from keras.saving import register_keras_serializable
 from util.preprocessing import preprocess
 from PIL import Image
-
+from fastapi.middleware.cors import CORSMiddleware
 
 
 
@@ -34,9 +34,9 @@ model_paths = [
     './models/best_fold_3.keras',
     './models/best_fold_4.keras',
     './models/best_fold_5.keras',
-    './models/best_model.h5'
 
 ]
+
 
 # Load models
 models=None
@@ -50,6 +50,20 @@ async def lifespan(app: FastAPI):
     # Any cleanup code can go here
     
 app = FastAPI(lifespan=lifespan)
+
+origins = [
+    "http://localhost:5173"
+]
+
+# Add the CORSMiddleware to your application.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"]
+)
+
 
 
 def soft_voting_predict(img_array):
