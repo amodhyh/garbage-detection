@@ -1,3 +1,5 @@
+import base64
+
 from fastapi import FastAPI,UploadFile,File
 from pydantic import BaseModel
 from PIL import Image
@@ -11,6 +13,7 @@ from tensorflow.keras.layers import Input
 import tensorflow as tf
 from keras.saving import register_keras_serializable
 from util.preprocessing import preprocess
+from PIL import Image
 
 
 
@@ -18,8 +21,6 @@ from util.preprocessing import preprocess
 model=None  # Placeholder for model loading logic
 MODEL_PATH='./models/best_model.h5'
 MODEL_PATH_FOLDS='./models/fold_{}.keras'
-IMAGE_WIDTH=224
-IMAGE_HEIGHT=224
 
 class Item(BaseModel):
     image: UploadFile = File(...)
@@ -32,26 +33,19 @@ model_paths = [
     './models/best_fold_2.keras',
     './models/best_fold_3.keras',
     './models/best_fold_4.keras',
-    './models/best_fold_5.keras'
+    './models/best_fold_5.keras',
+    './models/best_model.h5'
 
 ]
 
 # Load models
-
-
-# Usage example
-# img_array should be preprocessed and have shape (1, IMAGE_WIDTH, IMAGE_HEIGHT, 3)
 models=None
-
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global models,model_paths
     models = [load_model(path) for path in model_paths]
     print("Models loaded")
-
-
     yield
     # Any cleanup code can go here
     
@@ -66,8 +60,14 @@ def soft_voting_predict(img_array):
     # Get the predicted class index
     predicted_index = int(np.argmax(avg_probs))
     return predicted_index, avg_probs
-@app.get("/test")
-def test_model():
+
+@app.post("/classify")
+async def classify_image(file:UploadFile =File(...)):
+    global models,model_paths
+    contents = await file.read()
+    img = Image.open(BytesIO(contents)).convert("RGB")
+    img_np = np.array(img)
+
     class_labels = [
         "battery", "biological", "brown-glass", "cardboard", "clothes",
         "green-glass", "metal", "paper", "plastic", "shoes", "trash", "white-glass"
@@ -75,14 +75,6 @@ def test_model():
     if models is None:
         return {"error": "Model not loaded"}
 
-    image_path = "./metal32.jpg"
-
-    if not os.path.exists(image_path):
-        return {"error": "Sample image not found"}
-    img = Image.open(image_path).convert("RGB")
-
-    img = Image.open(image_path).convert("RGB")
-    img_np = np.array(img)
     img_array = preprocess(img_np)
     img_array = np.expand_dims(img_array, axis=0)
 
