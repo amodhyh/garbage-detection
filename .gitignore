@@ -1,9 +1,6 @@
 EC9570_Project.pdf
 data/
-.venv311
-.vscode
-backend/util/__pycache__/
-backend/__pycache__/
+
 # --- Frontend (React/Vite) ---
 # Dependencies
 frontend/node_modules/
@@ -32,4 +29,9 @@ frontend/pnpm-debug.log*
 frontend/.DS_Store
 frontend/Thumbs.db
 
+.venv311
+.dipproject_venv
+.vscode
+backend/__pycache__
 backend/models
+backend/util/__pycache__
