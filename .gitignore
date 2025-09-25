@@ -1,4 +1,22 @@
-frontend/.vite
-frontend/node_modules
+# Ignore Python virtual environments
+*.venv/
+__pycache__/
 
+# Ignore model files
 backend/models/CNNModel.keras
+
+# Ignore Jupyter notebook checkpoints and cache
+notebooks/*.ipynb_checkpoints/
+notebooks/__pycache__/
+
+# Ignore node_modules and build output in frontend
+frontend/node_modules/
+frontend/dist/
+
+# Ignore OS and editor files
+.DS_Store
+Thumbs.db
+
+# Ignore VS Code settings (optional)
+.vscode/
+.vite/
