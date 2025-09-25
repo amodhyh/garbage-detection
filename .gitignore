@@ -1,5 +1,4 @@
 backend/models
-backend/_pycache__
 backend/__pycache__
 frontend/node_modules
 .venv311
@@ -8,3 +7,5 @@ frontend/node_modules
 .idea
 
 backend/util/__pycache__/
+.venv311
+.dipproject_venv
