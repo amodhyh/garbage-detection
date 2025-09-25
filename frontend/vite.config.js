@@ -7,4 +7,5 @@ export default defineConfig({
   server: {
     watch: { usePolling: true, interval: 100 }, // helps on some Windows/network drives
   },
+  assetsInclude: ['**/*.lottie'],
 })

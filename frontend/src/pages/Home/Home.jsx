@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import {useNavigate,useLocation} from 'react-router-dom'
 import { postData } from '../../services/api'
 import '../../styles/home.css'
+import Lottie from 'lottie-react';
+import loadingAnimationFile from '../../assets/loading.lottie';
 
 const Home = () => {
 
@@ -70,11 +72,10 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <div className='main-text'>
-        
-        <h1>Welcome to <span className="sortify-brand">Sortify</span>.</h1></div>
-      
-      <div className='main-area'>
+      <div className={loadingAnime ? "main-text faded" : "main-text"}>
+        <h1>Welcome to <span className="sortify-brand">Sortify</span>.</h1>
+      </div>
+      <div className={loadingAnime ? "main-area faded" : "main-area"}>
         <div className="home-content-row">
           <div className="drag-drop-area" onDragOver={handleDragOver} onDrop={handleDrop}>
             {!previewImage && <p>Drag & Drop your images here</p>}
@@ -103,14 +104,17 @@ const Home = () => {
             type="button"
             className="classify-button"
             onClick={()=>handleClassify()}
-            
-          ><img src='./src/assets/classifyButton.svg'style={{ paddingRight:'5px',width: '240px' , height: '240px' }}></img> </button> 
-          
+          >
+            <img src='./src/assets/classifyButton.svg' style={{ paddingRight:'5px',width: '240px' , height: '240px' }}></img>
+          </button>
         </div>
       </div>
-      
-       
-        <div className='authors'>Made By - 2021/E/045 , 2021/E/179</div>
+      <div className={loadingAnime ? "authors faded" : "authors"}>Made By - 2021/E/045 , 2021/E/179</div>
+      {loadingAnime && (
+        <div className="loading-overlay">
+          <Lottie animationData={loadingAnimationFile} loop={true} />
+        </div>
+      )}
     </div>
   )
 }
