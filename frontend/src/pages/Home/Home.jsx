@@ -1,9 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
+import {useNavigate,useLocation} from 'react-router-dom'
+import { postData } from '../../services/api'
 import '../../styles/home.css'
+
 const Home = () => {
+
   const [image, setImage] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
   const fileInputRef = useRef(null)
+  const [loadingAnime, setLoadingAnime] = useState(false);
+  const navigate=useNavigate()
 
   // Centralized intake so drag/drop and browse reuse logic
   const pickFile = (file) => {
@@ -12,11 +18,14 @@ const Home = () => {
       alert('Please upload an image file.')
       return
     }
+
     // Revoke old preview URL to avoid memory leaks
     if (previewImage) URL.revokeObjectURL(previewImage)
     setImage(file)
     setPreviewImage(URL.createObjectURL(file))
   }
+
+
 
   // Handle browse -> file input change
   const handleInputChange = (e) => {
@@ -38,6 +47,26 @@ const Home = () => {
       if (previewImage) URL.revokeObjectURL(previewImage)
     }
   }, [previewImage])
+
+  
+  //handle the classification
+  const handleClassify=async ()=>{
+    //check whether the image is selected
+    if(!image){
+      alert("Please select an image first")
+      return
+    } //api-call
+      //postData returns a promise
+      //when the promise is resolved(HTTP req finished), we get the data and then is exec
+      //
+    setLoadingAnime(true)
+    postData(image).then((data)=>{
+      
+      setLoadingAnime(false)
+      navigate('/result',{state:{data:image}})
+
+    })
+  }
 
   return (
     <div className="home-page">
@@ -73,7 +102,7 @@ const Home = () => {
           <button
             type="button"
             className="classify-button"
-            onClick={()=>setImage(previewImage)}
+            onClick={()=>handleClassify()}
             
           ><img src='./src/assets/classifyButton.svg'style={{ paddingRight:'5px',width: '240px' , height: '240px' }}></img> </button> 
           
@@ -81,7 +110,7 @@ const Home = () => {
       </div>
       
        
-        <div className='authors'>Made By - 2021/E/045    ,   2021/E/179</div>
+        <div className='authors'>Made By - 2021/E/045 , 2021/E/179</div>
     </div>
   )
 }
