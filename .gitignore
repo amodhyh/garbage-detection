@@ -37,4 +37,15 @@ backend/models
 backend/util/__pycache__
 backend
 
+backend/models
+backend/__pycache__
+frontend/node_modules
+.venv311
+.vscode
+.vite
+.idea
+
+backend/util/__pycache__/
+.venv311
+.dipproject_venv
 get-pip.py
