@@ -29,4 +29,4 @@ frontend/pnpm-debug.log*
 frontend/.DS_Store
 frontend/Thumbs.db
 
-.gitignore
+backend/models
