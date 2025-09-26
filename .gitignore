@@ -20,3 +20,56 @@ Thumbs.db
 # Ignore VS Code settings (optional)
 .vscode/
 .vite/
+EC9570_Project.pdf
+data/
+
+# --- Frontend (React/Vite) ---
+# Dependencies
+frontend/node_modules
+
+# Build outputs (Vite/CRA)
+frontend/dist/
+frontend/build/
+
+# Environment files (keep secrets out of git)
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Caches and coverage
+frontend/.vite/
+frontend/.cache/
+frontend/coverage/
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# OS junk
+frontend/.DS_Store
+frontend/Thumbs.db
+frontend/node_modules
+
+.venv311
+.dipproject_venv
+.vscode
+backend/__pycache__
+backend/models
+backend/util/__pycache__
+backend
+
+backend/models
+backend/__pycache__
+frontend/node_modules
+.venv311
+.vscode
+.vite
+.idea
+
+backend/util/__pycache__/
+.venv311
+.dipproject_venv
+get-pip.py
+node_modules

@@ -1,0 +1,109 @@
+import base64
+
+from fastapi import FastAPI,UploadFile,File
+from pydantic import BaseModel
+from PIL import Image
+from io import BytesIO
+import numpy as np
+import uvicorn
+import os
+from contextlib import asynccontextmanager
+from tensorflow.keras.models import Model, load_model
+from tensorflow.keras.layers import Input
+import tensorflow as tf
+from keras.saving import register_keras_serializable
+from util.preprocessing import preprocess
+from PIL import Image
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
+model=None  # Placeholder for model loading logic
+MODEL_PATH='./models/best_model.h5'
+MODEL_PATH_FOLDS='./models/fold_{}.keras'
+
+class Item(BaseModel):
+    image: UploadFile = File(...)
+import numpy as np
+from tensorflow.keras.models import load_model
+
+# Paths to your models
+model_paths = [
+    './models/best_fold_1.keras',
+    './models/best_fold_2.keras',
+    './models/best_fold_3.keras',
+    './models/best_fold_4.keras',
+    './models/best_fold_5.keras',
+
+]
+
+
+# Load models
+models=None
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global models,model_paths
+    models = [load_model(path) for path in model_paths]
+    print("Models loaded")
+    yield
+    # Any cleanup code can go here
+    
+app = FastAPI(lifespan=lifespan)
+
+origins = [
+    "http://localhost:5173"
+]
+
+# Add the CORSMiddleware to your application.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"]
+)
+
+
+
+def soft_voting_predict(img_array):
+    # Get prediction probabilities from each model
+    probs = [model.predict(img_array)[0] for model in models]
+    # Average the probabilities
+    avg_probs = np.mean(probs, axis=0)
+    # Get the predicted class index
+    predicted_index = int(np.argmax(avg_probs))
+    return predicted_index, avg_probs
+
+@app.post("/classify")
+async def classify_image(file:UploadFile =File(...)):
+    global models,model_paths
+    contents = await file.read()
+    img = Image.open(BytesIO(contents)).convert("RGB")
+    img_np = np.array(img)
+
+    class_labels = [
+        "battery", "biological", "brown-glass", "cardboard", "clothes",
+        "green-glass", "metal", "paper", "plastic", "shoes", "trash", "white-glass"
+    ]
+    if models is None:
+        return {"error": "Model not loaded"}
+
+    img_array = preprocess(img_np)
+    img_array = np.expand_dims(img_array, axis=0)
+
+    predicted_index, avg_probs = soft_voting_predict(img_array)
+    predicted_class = class_labels[predicted_index]
+    return {
+        "predicted_class": predicted_class
+    }
+
+@app.get("/")
+def status():
+    return {"message": "app is running"}
+
+if __name__ == "__main__":
+    uvicorn.run("backend.main:app",
+                host="localhost",
+                port=8089,
+                reload=True)

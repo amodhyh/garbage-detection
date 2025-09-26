@@ -1,0 +1,177 @@
+/* Faded effect for loading */
+.faded {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Loading overlay for animation */
+.loading-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 44, 44, 0.955);
+  z-index: 9999;
+}
+/* Global reset and defaults */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #2e2e2e;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, Helvetica, sans-serif;
+}
+
+/* Page-specific */
+.home-page {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+  min-height: 100vh;
+  color: #1c0909;
+  background-image: url('../assets/homeBackground.svg');
+  /* your page styles here */
+}
+.main-text {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+.main-area{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+.sortify-brand{
+    color: #ffffff;
+    font-weight: 800;}
+    
+ .drag-drop-area {
+    display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* To position the input absolutely within this div */
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  background-color: #5e17eb;
+  border-radius: 40px;
+  width: 50%;
+
+}
+.drag-drop-area .upload-input {
+    
+  position: absolute;
+  inset: 0;           /* top: 0; right: 0; bottom: 0; left: 0 */
+  width: 30%;
+  height: 30%;
+  opacity: 0;         /* Fully transparent */
+  cursor: pointer;    /* Shows pointer cursor */
+  z-index: 2;         /* Make sure it's above the drop zone content */
+  border: none;       /* Remove any border */
+}
+.drag-drop-area:hover {
+  background-color: #ffffff;
+  border-color: #7b5fff;
+  color:#5e17eb;
+  
+}
+.drag-drop-area:hover .attach-button {
+  
+  filter: invert(1);
+  
+}
+.drag-drop-area .preview {
+  margin-top: 20px;
+  width: 50%;
+  height: 50%px;
+  overflow: hidden;
+  border: #2e2e2e 2px;
+  background: none;
+}
+.drag-drop-area .preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+background: none;  
+}
+.upload-button{
+  border: none;
+  border-radius: 50%;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;      /* or any size you want */
+  height: 50px;
+}
+.classify-button{
+  border: none;
+  border-radius: 50%;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;      /* or any size you want */
+  height: 60px;
+}
+
+.authors {
+  position: fixed;
+  bottom: 16px;
+  left: 0;
+  width: 100vw;
+  text-align: center;
+  font-size: 1rem;
+  color: #413d3d;
+  z-index: 10;
+}
+
+.drag-drop-area {
+  position: relative;
+}
+.attach-button {
+border-radius: 50%;
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  padding-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.home-content-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 32px; /* space between drag area and button */
+  margin-top: 32px;
+}
