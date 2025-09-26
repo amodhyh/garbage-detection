@@ -3,7 +3,7 @@ data/
 
 # --- Frontend (React/Vite) ---
 # Dependencies
-frontend/node_modules/
+frontend/node_modules
 
 # Build outputs (Vite/CRA)
 frontend/dist/
@@ -28,6 +28,7 @@ frontend/pnpm-debug.log*
 # OS junk
 frontend/.DS_Store
 frontend/Thumbs.db
+frontend/node_modules
 
 .venv311
 .dipproject_venv
@@ -49,3 +50,4 @@ backend/util/__pycache__/
 .venv311
 .dipproject_venv
 get-pip.py
+node_modules

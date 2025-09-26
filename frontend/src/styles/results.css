@@ -1,0 +1,81 @@
+/* Results page layout */
+.results-page {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start; /* chart aligned left */
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+/* Chart container */
+.chart-container {
+  width: 100%;
+  max-width: 600px;
+  background: #2e2e2e; /* changed from white */
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-left: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Main classification text */
+.main-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 0;
+  margin-left: 2rem;
+}
+
+.highlight {
+  font-weight: bold;
+  font-weight: 900;
+}
+.highlight.recyclable {
+  color: #4e09e3;
+}
+.highlight.nonrecyclable {
+  color: red;
+}
+
+/* Recyclability status - aligned right center */
+.recyclability-status {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row; /* ensure inline layout */
+  align-items: center; /* vertical center alignment */
+  gap: 0; /* 10–20px gap between logo and text */
+  margin: 0;
+}
+
+.recycle-logo {
+  height: 8rem;
+  min-width: 8rem;
+  object-fit: contain;
+  margin: 0;
+  padding: 0;
+}
+
+.recycle-text {
+  color: white;
+  font-size: 3rem; /* slightly smaller than before */
+  font-weight: 900;
+ margin: 0;
+  padding: 0;
+}
+
+/* Chart.js canvas styling */
+.results-page canvas {
+  background: #2e2e2e; /* match container */
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(54,162,235,0.08);
+}
