@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Garbage Classification Project</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="garbage-classification-project">Garbage Classification Project</h1>
+<h2 id="overview">Overview</h2>
+<p>This project is a full-stack application for classifying garbage images into categories using deep learning. It combines a FastAPI backend (Python) with a React frontend for an interactive user experience.</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#garbage-classification-project">Garbage Classification Project</a>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#1-features">1. Features</a></li>
+<li><a href="#2-architecture">2. Architecture</a>
+<ul>
+<li><a href="#data-flow">Data Flow</a></li>
+</ul>
+</li>
+<li><a href="#3-project-structure">3. Project Structure</a></li>
+<li><a href="#4-technologies-used">4. Technologies Used</a></li>
+<li><a href="#5-digital-image-processing-techniques">5. Digital Image Processing Techniques</a></li>
+<li><a href="#6-cnn-model-architecture--training">6. CNN Model Architecture &amp; Training</a></li>
+<li><a href="#7-setup--installation">7. Setup &amp; Installation</a>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#backend-setup">Backend Setup</a></li>
+<li><a href="#frontend-setup">Frontend Setup</a></li>
+</ul>
+</li>
+<li><a href="#8-usage">8. Usage</a></li>
+<li><a href="#9-model-training--evaluation">9. Model Training &amp; Evaluation</a></li>
+<li><a href="#10-contributing">10. Contributing</a></li>
+<li><a href="#11-license">11. License</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#architecture">Architecture</a>
+<ul>
+<li><a href="#data-flow-1">Data Flow</a></li>
+</ul>
+</li>
+<li><a href="#setup--installation">Setup &amp; Installation</a>
+<ul>
+<li><a href="#prerequisites-1">Prerequisites</a></li>
+<li><a href="#backend-setup-1">Backend Setup</a></li>
+<li><a href="#frontend-setup-1">Frontend Setup</a></li>
+</ul>
+</li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#project-structure">Project Structure</a></li>
+<li><a href="#technologies-used">Technologies Used</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="1-features">1. Features</h2>
+<ul>
+<li><strong>Interactive Frontend:</strong> Responsive React UI for image upload, result visualization, and classification history chart.</li>
+<li><strong>Efficient Backend:</strong> FastAPI server serving predictions from a trained Keras CNN model.</li>
+<li><strong>Model Integration:</strong> Seamless use of TensorFlow/Keras models for real-time inference.</li>
+<li><strong>Classification History:</strong> Bar chart of previous classifications using localStorage.</li>
+<li><strong>Recyclability Status:</strong> Visual indication (logo, color) of whether the predicted class is recyclable.</li>
+<li><strong>PDF Report Generation:</strong> (Planned) Downloadable report of classification results.</li>
+</ul>
+<hr>
+<h2 id="2-architecture">2. Architecture</h2>
+<pre><code>Frontend (React) &lt;-&gt; FastAPI Backend &lt;-&gt; Keras Model
+                  |                |                  |
+        User Uploads      Receives API      Model Predicts
+        Image/Views UI    Requests/Results  Class &amp; Probabilities
+</code></pre>
+<h3 id="data-flow">Data Flow</h3>
+<ol>
+<li>User uploads an image via the frontend.</li>
+<li>Frontend sends the image to the FastAPI backend.</li>
+<li>Backend preprocesses the image and runs it through the CNN model.</li>
+<li>Backend returns the predicted class and probabilities.</li>
+<li>Frontend displays the result, recyclability status, and updates the classification history chart.</li>
+</ol>
+<hr>
+<h2 id="3-project-structure">3. Project Structure</h2>
+<pre><code>Project/
+├── backend/
+│   ├── main.py
+│   ├── models/
+│   └── util/
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   ├── components/
+│   │   ├── services/
+│   │   └── styles/
+│   └── public/
+├── data/
+│   └── raw/
+├── notebooks/
+│   ├── preprocessing.ipynb
+│   └── CNNModel.ipynb
+├── requirements.txt
+├── README.md
+└── ...
+</code></pre>
+<hr>
+<h2 id="4-technologies-used">4. Technologies Used</h2>
+<ul>
+<li><strong>Backend:</strong> Python, FastAPI, TensorFlow/Keras</li>
+<li><strong>Frontend:</strong> React, Chart.js, react-chartjs-2, Vite</li>
+<li><strong>Other:</strong> Jupyter Notebooks, localStorage</li>
+</ul>
+<hr>
+<h2 id="5-digital-image-processing-techniques">5. Digital Image Processing Techniques</h2>
+<ul>
+<li><strong>Image Resizing:</strong> All input images are resized to 224x224 pixels to match the input requirements of MobileNetV2.</li>
+<li><strong>Image Enhancement:</strong> CLAHE (Contrast Limited Adaptive Histogram Equalization) is applied to the luminance channel to improve contrast and detail.</li>
+<li><strong>Color Space Conversion:</strong> Images are converted from BGR to YCrCb for enhancement, then back to RGB for model input.</li>
+<li><strong>Normalization:</strong> Pixel values are scaled to the [0, 1] range for stable training.</li>
+<li><strong>Data Augmentation:</strong> Random rotations, flips, and other augmentations are applied to increase dataset diversity and reduce overfitting.</li>
+<li><strong>Label Encoding:</strong> Class labels are encoded using scikit-learn’s LabelEncoder for compatibility with Keras.</li>
+</ul>
+<hr>
+<h2 id="6-cnn-model-architecture--training">6. CNN Model Architecture &amp; Training</h2>
+<ul>
+<li><strong>Base Model:</strong> MobileNetV2 (pretrained on ImageNet, used as feature extractor)
+<ul>
+<li>Input shape: (224, 224, 3)</li>
+<li>All layers frozen by default; optionally, last N layers can be unfrozen for fine-tuning.</li>
+</ul>
+</li>
+<li><strong>Custom Head:</strong>
+<ul>
+<li>Global Average Pooling</li>
+<li>Dropout (0.2)</li>
+<li>Dense layer with softmax activation for multi-class classification</li>
+</ul>
+</li>
+<li><strong>Training Details:</strong>
+<ul>
+<li>Optimizer: Adam</li>
+<li>Loss: Categorical Crossentropy</li>
+<li>Metrics: Accuracy, Precision, Recall, AUC, Top-3 Accuracy</li>
+<li>K-Fold Cross Validation (5 folds) for robust evaluation</li>
+<li>Early Stopping and ReduceLROnPlateau callbacks for efficient training</li>
+</ul>
+</li>
+<li><strong>Ensemble:</strong> Final predictions can be made using a soft-voting ensemble of the best models from each fold.</li>
+</ul>
+<hr>
+<h2 id="7-setup--installation">7. Setup &amp; Installation</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Python 3.11+</li>
+<li>Node.js &amp; npm</li>
+</ul>
+<h3 id="backend-setup">Backend Setup</h3>
+<ol>
+<li>Navigate to the <code>backend</code> directory:
+<code>bash      cd backend      </code></li>
+<li>Install Python dependencies:
+<code>bash      pip install -r ../requirements.txt      </code></li>
+<li>Start the FastAPI server:
+<code>bash      uvicorn main:app --host localhost --port 8089 --reload      </code></li>
+</ol>
+<h3 id="frontend-setup">Frontend Setup</h3>
+<ol>
+<li>Navigate to the <code>frontend</code> directory:
+<code>bash      cd frontend      </code></li>
+<li>Install Node.js dependencies:
+<code>bash      npm install      </code></li>
+<li>Start the React development server:
+<code>bash      npm run dev      </code></li>
+</ol>
+<hr>
+<h2 id="8-usage">8. Usage</h2>
+<ol>
+<li>Open the frontend in your browser (usually at <code>http://localhost:5173</code>).</li>
+<li>Upload an image to classify.</li>
+<li>View the predicted class, recyclability status, and previous classification chart.</li>
+<li>(Optional) Download a PDF report of the result (if implemented).</li>
+</ol>
+<hr>
+<h2 id="9-model-training--evaluation">9. Model Training &amp; Evaluation</h2>
+<ul>
+<li><strong>K-Fold Cross Validation:</strong> The dataset is split into 5 folds; each fold trains a fresh model and evaluates on its validation split.</li>
+<li><strong>Performance Metrics:</strong> Accuracy, precision, recall, AUC, and top-3 accuracy are tracked per fold.</li>
+<li><strong>Confusion Matrix:</strong> Visualized for overall and per-fold results to analyze misclassifications.</li>
+<li><strong>Learning Curves:</strong> Training and validation accuracy/loss curves are plotted for each fold and averaged.</li>
+</ul>
+<hr>
+<h2 id="10-contributing">10. Contributing</h2>
+<p>Contributions are welcome! Please fork the repository and submit a pull request. For major changes, open an issue first to discuss what you would like to change.</p>
+<hr>
+<h2 id="11-license">11. License</h2>
+<p>This project is for educational purposes as part of the Digital Image Processing course.</p>
+<hr>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Interactive Frontend:</strong> Responsive React UI for image upload, result visualization, and classification history chart.</li>
+<li><strong>Efficient Backend:</strong> FastAPI server serving predictions from a trained Keras CNN model.</li>
+<li><strong>Model Integration:</strong> Seamless use of TensorFlow/Keras models for real-time inference.</li>
+<li><strong>Classification History:</strong> Bar chart of previous classifications using localStorage.</li>
+<li><strong>Recyclability Status:</strong> Visual indication (logo, color) of whether the predicted class is recyclable.</li>
+<li><strong>PDF Report Generation:</strong> (Planned) Downloadable report of classification results.</li>
+</ul>
+<hr>
+<h2 id="architecture">Architecture</h2>
+<pre><code>Frontend (React) &lt;-&gt; FastAPI Backend &lt;-&gt; Keras Model
+                  |                |                  |
+                  |                |                  |
+        User Uploads      Receives API      Model Predicts
+        Image/Views UI    Requests/Results  Class &amp; Probabilities
+</code></pre>
+<h3 id="data-flow-1">Data Flow</h3>
+<ol>
+<li>User uploads an image via the frontend.</li>
+<li>Frontend sends the image to the FastAPI backend.</li>
+<li>Backend preprocesses the image and runs it through the CNN model.</li>
+<li>Backend returns the predicted class and probabilities.</li>
+<li>Frontend displays the result, recyclability status, and updates the classification history chart.</li>
+</ol>
+<hr>
+<h2 id="setup--installation">Setup &amp; Installation</h2>
+<h3 id="prerequisites-1">Prerequisites</h3>
+<ul>
+<li>Python 3.11+</li>
+<li>Node.js &amp; npm</li>
+</ul>
+<h3 id="backend-setup-1">Backend Setup</h3>
+<ol>
+<li>Navigate to the <code>backend</code> directory:
+<code>bash      cd backend      </code></li>
+<li>Install Python dependencies:
+<code>bash      pip install -r ../requirements.txt      </code></li>
+<li>Start the FastAPI server:
+<code>bash      uvicorn main:app --host localhost --port 8089 --reload      </code></li>
+</ol>
+<h3 id="frontend-setup-1">Frontend Setup</h3>
+<ol>
+<li>Navigate to the <code>frontend</code> directory:
+<code>bash      cd frontend      </code></li>
+<li>Install Node.js dependencies:
+<code>bash      npm install      </code></li>
+<li>Start the React development server:
+<code>bash      npm run dev      </code></li>
+</ol>
+<hr>
+<h2 id="usage">Usage</h2>
+<ol>
+<li>Open the frontend in your browser (usually at <code>http://localhost:5173</code>).</li>
+<li>Upload an image to classify.</li>
+<li>View the predicted class, recyclability status, and previous classification chart.</li>
+<li>(Optional) Download a PDF report of the result (if implemented).</li>
+</ol>
+<hr>
+<h2 id="project-structure">Project Structure</h2>
+<pre><code>Project/
+├── backend/
+│   ├── main.py
+│   ├── models/
+│   └── util/
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   ├── components/
+│   │   ├── services/
+│   │   └── styles/
+│   └── public/
+├── data/
+│   └── raw/
+├── notebooks/
+│   ├── preprocessing.ipynb
+│   └── CNNModel.ipynb
+├── requirements.txt
+├── README.md
+└── ...
+</code></pre>
+<hr>
+<h2 id="technologies-used">Technologies Used</h2>
+<ul>
+<li><strong>Backend:</strong> Python, FastAPI, TensorFlow/Keras</li>
+<li><strong>Frontend:</strong> React, Chart.js, react-chartjs-2, Vite</li>
+<li><strong>Other:</strong> Jupyter Notebooks, localStorage</li>
+</ul>
+<hr>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are welcome! Please fork the repository and submit a pull request. For major changes, open an issue first to discuss what you would like to change.</p>
+<hr>
+<h2 id="license">License</h2>
+<p>This project is for educational purposes as part of the Digital Image Processing course.</p>
+
+            
+            
+        </body>
+        </html>
