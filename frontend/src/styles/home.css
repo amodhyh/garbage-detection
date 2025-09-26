@@ -46,7 +46,7 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 56px;
   font-weight: 700;
-  color: #222;
+  color: #000000;
   margin: 0;
 }
 .main-area{
@@ -140,7 +140,8 @@ background: none;
 .authors {
   position: fixed;
   bottom: 16px;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100vw;
   text-align: center;
   font-size: 1rem;

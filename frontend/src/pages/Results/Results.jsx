@@ -76,9 +76,9 @@ const ResultsPage = () => {
     <div className="results-page">
       {/* Main text and chart column */}
       <div className="main-col">
-        <div className="main-text">
+        <div className="main-text-results">
           <h1>
-             Image belongs to the{' '}
+             Waste Category {' '}
             <span
               className={isRecyclable ? 'highlight recyclable' : 'highlight nonrecyclable'}
             >

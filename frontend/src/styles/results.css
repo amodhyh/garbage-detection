@@ -5,7 +5,9 @@
   align-items: flex-start;
   justify-content: flex-start; /* chart aligned left */
   min-height: 60vh;
-  padding: 2rem;
+  padding: 1rem;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 /* Chart container */
@@ -15,13 +17,14 @@
   background: #2e2e2e; /* changed from white */
   border-radius: 1rem;
   padding: 1rem;
-  margin-top: 0.5rem;
+  padding-top: 0.1rem;
+  margin-top: 0rem;
   margin-left: 2rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 /* Main classification text */
-.main-text {
+.main-text-results {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +57,7 @@
   flex-direction: row; /* ensure inline layout */
   align-items: center; /* vertical center alignment */
   gap: 0; /* 10–20px gap between logo and text */
-  margin: 0;
+  margin-right: 15%;
 }
 
 .recycle-logo {
