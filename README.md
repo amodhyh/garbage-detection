@@ -42,6 +42,10 @@ This project is a full-stack application for classifying garbage images into cat
 
 ## 1. Features
 - **Interactive Frontend:** Responsive React UI for image upload, result visualization, and classification history chart.
+  <img width="1806" height="843" alt="image" src="https://github.com/user-attachments/assets/f79efae2-b1ab-4e8b-bd47-d09fdbbf0994" />
+  <img width="1602" height="856" alt="image" src="https://github.com/user-attachments/assets/f97bcbd3-178f-46f4-8fc8-13856dcd4da4" />
+
+
 - **Efficient Backend:** FastAPI server serving predictions from a trained Keras CNN model.
 - **Model Integration:** Seamless use of TensorFlow/Keras models for real-time inference.
 - **Classification History:** Bar chart of previous classifications using localStorage.
