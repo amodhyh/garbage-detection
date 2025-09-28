@@ -166,9 +166,40 @@ Project/
 
 ## 9. Model Training & Evaluation
 - **K-Fold Cross Validation:** The dataset is split into 5 folds; each fold trains a fresh model and evaluates on its validation split.
+- - Ensemble method with soft voting was used to get the final model combining all the best model from the cross validation folds.
 - **Performance Metrics:** Accuracy, precision, recall, AUC, and top-3 accuracy are tracked per fold.
 - **Confusion Matrix:** Visualized for overall and per-fold results to analyze misclassifications.
 - **Learning Curves:** Training and validation accuracy/loss curves are plotted for each fold and averaged.
+- **Overall Results**
+<table>
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1-Score</th>
+      <th>Support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>battery</td><td>0.95</td><td>0.93</td><td>0.94</td><td>1989</td></tr>
+    <tr><td>biological</td><td>0.99</td><td>0.98</td><td>0.98</td><td>1989</td></tr>
+    <tr><td>brown-glass</td><td>0.93</td><td>0.86</td><td>0.90</td><td>1989</td></tr>
+    <tr><td>cardboard</td><td>0.95</td><td>0.92</td><td>0.94</td><td>1989</td></tr>
+    <tr><td>clothes</td><td>0.99</td><td>0.98</td><td>0.99</td><td>1989</td></tr>
+    <tr><td>green-glass</td><td>0.97</td><td>0.91</td><td>0.94</td><td>1989</td></tr>
+    <tr><td>metal</td><td>0.89</td><td>0.81</td><td>0.85</td><td>1989</td></tr>
+    <tr><td>paper</td><td>0.92</td><td>0.94</td><td>0.93</td><td>1989</td></tr>
+    <tr><td>plastic</td><td>0.80</td><td>0.82</td><td>0.81</td><td>1989</td></tr>
+    <tr><td>shoes</td><td>0.97</td><td>0.99</td><td>0.98</td><td>1989</td></tr>
+    <tr><td>trash</td><td>0.90</td><td>0.96</td><td>0.93</td><td>1989</td></tr>
+    <tr><td>white-glass</td><td>0.77</td><td>0.89</td><td>0.83</td><td>1989</td></tr>
+    <tr><td><b>accuracy</b></td><td></td><td></td><td><b>0.92</b></td><td>23868</td></tr>
+    <tr><td><b>macro avg</b></td><td><b>0.92</b></td><td><b>0.92</b></td><td><b>0.92</b></td><td>23868</td></tr>
+    <tr><td><b>weighted avg</b></td><td><b>0.92</b></td><td><b>0.92</b></td><td><b>0.92</b></td><td>23868</td></tr>
+  </tbody>
+</table>
+<img width="933" height="790" alt="image" src="https://github.com/user-attachments/assets/ee7d5787-e8f5-4cb6-b2fc-0db507db1db7" />
 
 ---
 
